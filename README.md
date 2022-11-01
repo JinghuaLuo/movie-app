@@ -6,6 +6,7 @@
 
 Hi, there! This app visualizes the data of movie industry between 1980-2020 and builds interactive function with [Streamlit](https://streamlit.io/). It gives us the overview of movie industry, play fun with it!
 
+![image](https://github.com/JinghuaLuo/movie-app/blob/main/app-screenshot.png)
 
 ## Table of Contents
 
