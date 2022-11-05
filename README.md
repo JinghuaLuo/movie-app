@@ -12,7 +12,7 @@ Hi, there! This app visualizes the data of movie industry between 1980-2020 and 
 
 - [Install](#install)
 - [Usage](#usage)
-
+- [Coding Style](#codingstyle)
 
 ## Install
 
@@ -69,16 +69,12 @@ fig_line.update_layout(title='Growth Rate of Gross', xaxis_title='Year', yaxis_t
 ```
 grouped bar chart
 ```
-    movies_of_country = movies_of_country.to_frame()
-    movies_of_country = movies_of_country.rename(columns={'year': 'value'})
-    movies_of_country = movies_of_country.reset_index()
-
-    fig_bar2 = px.bar(movies_of_country, x='year', y='value', color='country', barmode='group', opacity=0.7)
-    fig_bar2.update_layout(
-        title='The Number of Movies in the Country',
-        xaxis_title='Year',
-        yaxis_title='Number of Movies',
-        )
+fig_bar2 = px.bar(movies_of_country, x='year', y='value', color='country', barmode='group', opacity=0.7)
+fig_bar2.update_layout(
+    title='The Number of Movies in the Country',
+    xaxis_title='Year',
+    yaxis_title='Number of Movies',
+    )
 ```
 
 
