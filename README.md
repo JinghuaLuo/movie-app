@@ -29,9 +29,13 @@ Streamlit can also be installed in a virtual environment on Windows, Mac, and Li
 
 ## Usage
 
-pandas
+deal with missing data using drop,dropna, fillna
 ```
-movie = pd.read_csv('movies.csv')
+movie.drop(['budget'], axis=1, inplace=True)
+movie.dropna(subset = ['rating', 'score', 'votes', 'writer', 'star', 'country', 'company', 'runtime'], inplace=True)
+most_freq = movie.rating.value_counts().idxmax()
+movie.rating.fillna(most_freq, inplace=True)
+movie.gross.fillna(movie.gross.mean(), inplace=True)
 ```
 
 wordcloud
@@ -46,11 +50,40 @@ plt.imshow(worldcloud)
 plt.axis('off')
 ```
 
-plotly
+pie chart
 ```
 percentage_of_share = (movie.genre.value_counts()/len(movie.genre))*100
 fig_pie = px.pie(values=percentage_of_share, names=movie.genre.unique(), title='The share of Genre Types', opacity=0.7)
 fig_pie.update_traces(textposition='inside')
 fig_pie.update_layout(uniformtext_minsize=4, uniformtext_mode='hide')
 ```
+
+line chart
+```
+gross_for_year = movie.groupby('year')['gross'].sum()
+growth_rate = gross_for_year.pct_change(1).fillna(0)
+fig_line = go.Figure()
+fig_line.add_trace(go.Scatter(x=movie.year.unique(), y=growth_rate, mode='lines+markers'))
+fig_line.update_traces(marker_color='#FF4B4B')
+fig_line.update_layout(title='Growth Rate of Gross', xaxis_title='Year', yaxis_title='Growth Rate', yaxis=dict(tickformat='.1%'))
+```
+grouped bar chart
+```
+    movies_of_country = movies_of_country.to_frame()
+    movies_of_country = movies_of_country.rename(columns={'year': 'value'})
+    movies_of_country = movies_of_country.reset_index()
+
+    fig_bar2 = px.bar(movies_of_country, x='year', y='value', color='country', barmode='group', opacity=0.7)
+    fig_bar2.update_layout(
+        title='The Number of Movies in the Country',
+        xaxis_title='Year',
+        yaxis_title='Number of Movies',
+        )
+```
+
+
+## Coding Style
+The coding style is UTF-8
+
+
 
